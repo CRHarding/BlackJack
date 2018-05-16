@@ -31,6 +31,6 @@ public class Main {
     }
 
     static class Card {
-        
+
     }
 }
