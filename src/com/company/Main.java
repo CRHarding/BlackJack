@@ -20,7 +20,14 @@ public class Main {
 //        int numberOfDecks = reader.nextInt();
         int numberOfDecks = 2;
         Deck d = new Deck(numberOfDecks);
-        System.out.println(d.deal());
+        Hand playerHand = new Hand();
+        Hand computerHand = new Hand();
+        Card dealtCard = d.deal();
+        playerHand.addCard(dealtCard);
+        dealtCard = d.deal();
+        playerHand.addCard(dealtCard);
+        System.out.println(playerHand);
+        System.out.println(playerHand.getTotal());
 //        while (money > 0) {
 //
 //        }
@@ -53,10 +60,32 @@ public class Main {
             return dealCard;
         }
     }
-    
+
     static class Hand {
         ArrayList<Card> hand = new ArrayList<Card>();
+        int size = 0;
 
+        public void addCard(Card newCard) {
+            this.hand.add(newCard);
+            size = size + 1;
+        }
+
+        public int getTotal() {
+            int value = 0;
+            for (int i = 0; i < hand.size(); i++) {
+                Card valueCard = hand.get(i);
+                value = value + valueCard.getValue();
+            }
+            return value;
+        }
+        
+        public int getSize() {
+            return this.size;
+        }
+
+        public Card getCard(int place) {
+            return this.hand.get(place);
+        }
     }
 
     static class Card {
@@ -87,6 +116,10 @@ public class Main {
         public String toString() {
             if (this.rank != 0) return this.rank + " of " + this.suit;
             return "Ace of " + this.suit;
+        }
+
+        public int getValue() {
+            return this.rank * 13;
         }
     }
 }

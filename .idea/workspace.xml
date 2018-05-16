@@ -17,12 +17,19 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+            <state relative-caret-position="362">
+              <caret line="80" column="8" lean-forward="true" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#969#975#0" expanded="true" />
-                <marker date="1526474374865" expanded="true" signature="887:929" ph="..." />
+                <element signature="e#1006#1012#0" expanded="true" />
+                <element signature="e#1870#1876#0" expanded="true" />
+                <element signature="e#2591#2592#0" expanded="true" />
+                <element signature="e#2629#2630#0" expanded="true" />
+                <element signature="e#2672#2673#0" expanded="true" />
+                <element signature="e#2707#2708#0" expanded="true" />
+                <element signature="e#3120#3121#0" expanded="true" />
+                <element signature="e#3163#3164#0" expanded="true" />
+                <marker date="1526475413630" expanded="true" signature="1161:1203" ph="..." />
               </folding>
             </state>
           </provider>
@@ -155,8 +162,15 @@
           <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#969#975#0" expanded="true" />
-            <marker date="1526474374865" expanded="true" signature="887:929" ph="..." />
+            <element signature="e#1006#1012#0" expanded="true" />
+            <element signature="e#1870#1876#0" expanded="true" />
+            <element signature="e#2591#2592#0" expanded="true" />
+            <element signature="e#2629#2630#0" expanded="true" />
+            <element signature="e#2672#2673#0" expanded="true" />
+            <element signature="e#2707#2708#0" expanded="true" />
+            <element signature="e#3120#3121#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <marker date="1526475413630" expanded="true" signature="1161:1203" ph="..." />
           </folding>
         </state>
       </provider>
@@ -188,12 +202,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+        <state relative-caret-position="362">
+          <caret line="80" column="8" lean-forward="true" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#969#975#0" expanded="true" />
-            <marker date="1526474374865" expanded="true" signature="887:929" ph="..." />
+            <element signature="e#1006#1012#0" expanded="true" />
+            <element signature="e#1870#1876#0" expanded="true" />
+            <element signature="e#2591#2592#0" expanded="true" />
+            <element signature="e#2629#2630#0" expanded="true" />
+            <element signature="e#2672#2673#0" expanded="true" />
+            <element signature="e#2707#2708#0" expanded="true" />
+            <element signature="e#3120#3121#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <marker date="1526475413630" expanded="true" signature="1161:1203" ph="..." />
           </folding>
         </state>
       </provider>
