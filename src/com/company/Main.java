@@ -26,9 +26,26 @@ public class Main {
         playerHand.addCard(dealtCard);
         dealtCard = d.deal();
         playerHand.addCard(dealtCard);
-        System.out.println(playerHand);
-        System.out.println(playerHand.getTotal());
-//        while (money > 0) {
+        dealtCard = d.deal();
+        computerHand.addCard(dealtCard);
+        dealtCard = d.deal();
+        computerHand.addCard(dealtCard);
+        System.out.println(playerHand.getSize());
+        System.out.println(computerHand.getSize());
+        for (int i = 0; i < playerHand.getSize(); i++) {
+            System.out.println(playerHand.getCard(i));
+        }
+
+        for (int i = 0; i < playerHand.getSize(); i++) {
+            System.out.println(computerHand.getCard(i));
+        }
+
+        if (playerHand.getTotal() > computerHand.getTotal()) {
+            System.out.println("You won!!");
+        } else {
+            System.out.println("Sorry, chump. You lost.");
+        }
+        //        while (money > 0) {
 //
 //        }
     }
@@ -78,7 +95,7 @@ public class Main {
             }
             return value;
         }
-        
+
         public int getSize() {
             return this.size;
         }
@@ -94,7 +111,6 @@ public class Main {
 
         Card(int num) {
             rank = num % 13;
-            int modulus = num % 4;
             switch (num % 4) {
                 case 0:
                     suit = "Clubs";
