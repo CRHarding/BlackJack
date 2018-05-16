@@ -44,22 +44,36 @@ public class Main {
                 }
             }
             player.setMoney(betAmount);
-            System.out.println("Would you like to hit or stay?");
-            String choice = reader.nextLine().toLowerCase();
-            if (choice.equals("h") || choice.equals("hit")) {
-                player.addCard();
+            boolean hit = true;
+            while (hit) {
+                System.out.println("Would you like to hit or stay?");
+                String choice = reader.next().toLowerCase();
+                if (choice.equals("h") || choice.equals("hit")) {
+                    player.addCard();
+                    int playerTotal = player.getBlackjack();
+                    System.out.println("This is your total points --> " + playerTotal);
+                    if (playerTotal > 21) {
+                        System.out.println("You busted, sorry chump. Want to play again? Yes or No");
+                    }
+                    System.out.println("Current Cards: " + player.toString());
+                } else if (choice.equals("s") || choice.equals("stay")) {
+                    hit = false;
+                    System.out.println("Your hand:");
+                    System.out.println(player.toString());
+                    System.out.println("Computer hand:");
+                    System.out.println(computer.toString());
+                    if (player.getTotal() > computer.getTotal()) {
+                        player.setMoney(player.getMoney() + betAmount * 2);
+                        System.out.println("You won!! You have $" + player.getMoney() + " left.");
+                        System.out.println("Would you like to play again? Yes or No");
+                    } else {
+                        System.out.println("Sorry, chump. You lost. You have $" + player.getMoney() + " left");
+                        System.out.println("Would you like to play again? Yes or No");
+                    }
+                }
             }
-            int playerTotal = player.getBlackjack();
-            if (playerTotal > 21) {
-                System.out.println("You busted, sorry chump. Want to play again? Yes or No");
-                String wantToPlay = reader.nextLine().toLowerCase();
-                playAgain = wantToPlay.equals("y") || wantToPlay.equals("yes");
-            }
-        }
-        if (player.getTotal() > computer.getTotal()) {
-            System.out.println("You won!! You have $" + player.getMoney() + " left.");
-        } else {
-            System.out.println("Sorry, chump. You lost. You have $" + player.getMoney() + " left");
+            String wantToPlay = reader.next().toLowerCase();
+            playAgain = wantToPlay.equals("y") || wantToPlay.equals("yes");
         }
     }
 
@@ -99,12 +113,6 @@ public class Main {
 
         public String toString() {
             String returnString = "";
-            if (this.hand.getCard(0).toString().contains("Ace")) {
-                returnString = "You have an ";
-            } else {
-                returnString = "You have a ";
-            }
-
             for (int i = 0; i < this.hand.getSize(); i++) {
                 if (i != this.hand.getSize() - 1) {
                     if (this.hand.getCard(i + 1).toString().contains("Ace")) {
@@ -159,7 +167,7 @@ public class Main {
     }
 
     static class Hand {
-        ArrayList<Card> hand = new ArrayList<Card>();
+        ArrayList<Card> hand = new ArrayList<>();
         int size = 0;
 
         private void addCard(Card newCard) {
@@ -175,7 +183,7 @@ public class Main {
                 }else if (card.score == 1 && this.getTotal() + 10 <=21 ) {
                     handScore = handScore + 11;
                 } else {
-                    handScore = card.getValue();
+                    handScore = handScore + card.getValue();
                 }
             }
             System.out.println(handScore);
@@ -214,6 +222,7 @@ public class Main {
             if (score > 10) {
                 score = 10;
             }
+
             switch (num % 4) {
                 case 0:
                     suit = "Clubs";
