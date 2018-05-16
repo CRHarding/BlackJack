@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9a39b29a-c81b-4fb4-b612-aa01722c7fa1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BlackJack/com/company/Main.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -19,13 +17,19 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
+            <state relative-caret-position="2885">
+              <caret line="173" column="30" selection-start-line="173" selection-start-column="30" selection-end-line="173" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2093#2094#0" expanded="true" />
+                <element signature="e#2128#2129#0" expanded="true" />
+                <element signature="e#2096#2097#0" expanded="true" />
+                <element signature="e#2140#2141#0" expanded="true" />
+                <element signature="e#2746#2747#0" expanded="true" />
+                <element signature="e#2797#2798#0" expanded="true" />
                 <element signature="e#1578#1584#0" expanded="true" />
                 <element signature="e#2429#2435#0" expanded="true" />
-                <marker date="1526484507409" expanded="true" signature="1764:1806" ph="..." />
+                <marker date="1526485488724" expanded="true" signature="1374:1416" ph="..." />
               </folding>
             </state>
           </provider>
@@ -36,6 +40,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>j</find>
+      <find>public</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -131,7 +136,7 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2923077" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25333333" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
@@ -161,9 +166,15 @@
           <caret line="18" column="73" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2093#2094#0" expanded="true" />
+            <element signature="e#2128#2129#0" expanded="true" />
+            <element signature="e#2096#2097#0" expanded="true" />
+            <element signature="e#2140#2141#0" expanded="true" />
+            <element signature="e#2746#2747#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
             <element signature="e#1578#1584#0" expanded="true" />
             <element signature="e#2429#2435#0" expanded="true" />
-            <marker date="1526484507409" expanded="true" signature="1764:1806" ph="..." />
+            <marker date="1526485488724" expanded="true" signature="1374:1416" ph="..." />
           </folding>
         </state>
       </provider>
@@ -174,9 +185,15 @@
           <caret line="18" column="73" lean-forward="true" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2093#2094#0" expanded="true" />
+            <element signature="e#2128#2129#0" expanded="true" />
+            <element signature="e#2096#2097#0" expanded="true" />
+            <element signature="e#2140#2141#0" expanded="true" />
+            <element signature="e#2746#2747#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
             <element signature="e#1578#1584#0" expanded="true" />
             <element signature="e#2429#2435#0" expanded="true" />
-            <marker date="1526484507409" expanded="true" signature="1764:1806" ph="..." />
+            <marker date="1526485488724" expanded="true" signature="1374:1416" ph="..." />
           </folding>
         </state>
       </provider>
@@ -187,9 +204,15 @@
           <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2093#2094#0" expanded="true" />
+            <element signature="e#2128#2129#0" expanded="true" />
+            <element signature="e#2096#2097#0" expanded="true" />
+            <element signature="e#2140#2141#0" expanded="true" />
+            <element signature="e#2746#2747#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
             <element signature="e#1578#1584#0" expanded="true" />
             <element signature="e#2429#2435#0" expanded="true" />
-            <marker date="1526484507409" expanded="true" signature="1764:1806" ph="..." />
+            <marker date="1526485488724" expanded="true" signature="1374:1416" ph="..." />
           </folding>
         </state>
       </provider>
@@ -217,13 +240,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
+        <state relative-caret-position="2885">
+          <caret line="173" column="30" selection-start-line="173" selection-start-column="30" selection-end-line="173" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2093#2094#0" expanded="true" />
+            <element signature="e#2128#2129#0" expanded="true" />
+            <element signature="e#2096#2097#0" expanded="true" />
+            <element signature="e#2140#2141#0" expanded="true" />
+            <element signature="e#2746#2747#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
             <element signature="e#1578#1584#0" expanded="true" />
             <element signature="e#2429#2435#0" expanded="true" />
-            <marker date="1526484507409" expanded="true" signature="1764:1806" ph="..." />
+            <marker date="1526485488724" expanded="true" signature="1374:1416" ph="..." />
           </folding>
         </state>
       </provider>

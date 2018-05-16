@@ -20,27 +20,17 @@ public class Main {
 //        int numberOfDecks = reader.nextInt();
         int numberOfDecks = 2;
         Deck d = new Deck(numberOfDecks);
-        Hand playerHand = new Hand();
-        Hand computerHand = new Hand();
-        Card dealtCard = d.deal();
-        playerHand.addCard(dealtCard);
-        dealtCard = d.deal();
-        playerHand.addCard(dealtCard);
-        dealtCard = d.deal();
-        computerHand.addCard(dealtCard);
-        dealtCard = d.deal();
-        computerHand.addCard(dealtCard);
-        System.out.println(playerHand.getSize());
-        System.out.println(computerHand.getSize());
-        for (int i = 0; i < playerHand.getSize(); i++) {
-            System.out.println(playerHand.getCard(i));
-        }
+        User player = new User("Casey", d);
+        User computer = new User("Computer", d);
+        player.setupBlackjack();
+        computer.setupBlackjack();
 
-        for (int i = 0; i < playerHand.getSize(); i++) {
-            System.out.println(computerHand.getCard(i));
-        }
+        System.out.println(player.getSize());
+        System.out.println(computer.getSize());
+        System.out.println(player);
+        System.out.println(computer);
 
-        if (playerHand.getTotal() > computerHand.getTotal()) {
+        if (player.getTotal() > computer.getTotal()) {
             System.out.println("You won!!");
         } else {
             System.out.println("Sorry, chump. You lost.");
@@ -48,6 +38,57 @@ public class Main {
         //        while (money > 0) {
 //
 //        }
+    }
+
+    static class User {
+        String name;
+        Deck d;
+        Hand hand;
+
+        User(String name, Deck d) {
+            this.name = name;
+            this.d = d;
+            hand = new Hand();
+        }
+
+        private void addCard() {
+            hand.addCard(d.deal());
+        }
+
+        private void setupBlackjack() {
+            hand.addCard(d.deal());
+            hand.addCard(d.deal());
+        }
+
+        private int getSize() {
+            return hand.getSize();
+        }
+
+        public String toString() {
+            String returnString = "";
+            if (this.hand.getCard(0).toString().contains("Ace")) {
+                returnString = "You have an ";
+            } else {
+                returnString = "You have a ";
+            }
+
+            for (int i = 0; i < this.hand.getSize(); i++) {
+                if (i != this.hand.getSize() - 1) {
+                    if (this.hand.getCard(i + 1).toString().contains("Ace")) {
+                        returnString = returnString + this.hand.getCard(i) + " and an ";
+                    } else {
+                        returnString = returnString + this.hand.getCard(i) + " and a ";
+                    }
+                } else {
+                    returnString = returnString + this.hand.getCard(i);
+                }
+            }
+            return returnString;
+        }
+
+        private int getTotal() {
+            return this.hand.getTotal();
+        }
     }
 
     static class Deck {
@@ -60,7 +101,7 @@ public class Main {
             numDealt = 0;
         }
 
-        public void shuffle() {
+        private void shuffle() {
             int n = this.cards.size();
             Random random = new Random();
             for (int i = 0; i < this.cards.size(); i++) {
@@ -71,7 +112,7 @@ public class Main {
             }
         }
 
-        public Card deal() {
+        private Card deal() {
             Card dealCard = this.cards.remove(numDealt);
             numDealt = numDealt + 1;
             return dealCard;
@@ -82,7 +123,7 @@ public class Main {
         ArrayList<Card> hand = new ArrayList<Card>();
         int size = 0;
 
-        public void addCard(Card newCard) {
+        private void addCard(Card newCard) {
             this.hand.add(newCard);
             size = size + 1;
         }
@@ -130,11 +171,11 @@ public class Main {
         }
 
         public String toString() {
-            if (this.rank != 0) return this.rank + " of " + this.suit;
+            if (this.rank != 1) return this.rank + " of " + this.suit;
             return "Ace of " + this.suit;
         }
 
-        public int getValue() {
+        private int getValue() {
             return this.rank * 13;
         }
     }
