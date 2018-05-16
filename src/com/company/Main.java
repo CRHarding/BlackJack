@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-//        System.out.println("Welcome to Black Jack!");
-//        Scanner reader = new Scanner(System.in);
+        System.out.println("Welcome to Black Jack!");
+        Scanner reader = new Scanner(System.in);
 //        System.out.println("What is your name?");
 //        String name = reader.nextLine();
 //        System.out.println("Welcome " + name + ", how much money do you have?");
@@ -19,19 +19,47 @@ public class Main {
 //        System.out.println("How many decks will you be playing with?");
 //        int numberOfDecks = reader.nextInt();
         int numberOfDecks = 2;
+        int money = 50;
+        boolean playAgain = true;
+
         Deck d = new Deck(numberOfDecks);
-        User player = new User("Casey", d);
-        User computer = new User("Computer", d);
+        User player = new User("Casey", d, money);
+        User computer = new User("Computer", d, 0);
+
         player.setupBlackjack();
         computer.setupBlackjack();
 
-        System.out.println(player);
-        System.out.println(computer);
-
+        while (player.getMoney() > 0 && playAgain) {
+            System.out.println(player.toString());
+            System.out.println("How much would you like to bet?");
+            int betAmount = reader.nextInt();
+            while (betAmount < 0 || betAmount > player.getMoney()) {
+                if (betAmount < 0) {
+                    System.out.println("You've gotta betAmount more than 0 ya dingus!");
+                    betAmount = reader.nextInt();
+                }
+                if (betAmount > player.getMoney()) {
+                    System.out.println("We both know that you don't have that kinda dough...");
+                    betAmount = reader.nextInt();
+                }
+            }
+            player.setMoney(betAmount);
+            System.out.println("Would you like to hit or stay?");
+            String choice = reader.nextLine().toLowerCase();
+            if (choice.equals("h") || choice.equals("hit")) {
+                player.addCard();
+            }
+            int playerTotal = player.getBlackjack();
+            if (playerTotal > 21) {
+                System.out.println("You busted, sorry chump. Want to play again? Yes or No");
+                String wantToPlay = reader.nextLine().toLowerCase();
+                playAgain = wantToPlay.equals("y") || wantToPlay.equals("yes");
+            }
+        }
         if (player.getTotal() > computer.getTotal()) {
-            System.out.println("You won!!");
+            System.out.println("You won!! You have $" + player.getMoney() + " left.");
         } else {
-            System.out.println("Sorry, chump. You lost.");
+            System.out.println("Sorry, chump. You lost. You have $" + player.getMoney() + " left");
         }
     }
 
@@ -39,11 +67,21 @@ public class Main {
         String name;
         Deck d;
         Hand hand;
+        int money;
 
-        User(String name, Deck d) {
+        User(String name, Deck d, int money) {
             this.name = name;
             this.d = d;
             hand = new Hand();
+            this.money = money;
+        }
+
+        private int getMoney() {
+            return this.money;
+        }
+
+        private void setMoney(int amount) {
+            this.money = this.money - amount;
         }
 
         private void addCard() {
@@ -83,6 +121,10 @@ public class Main {
 
         private int getTotal() {
             return this.hand.getTotal();
+        }
+
+        private int getBlackjack() {
+            return this.hand.getBlackjack();
         }
     }
 
@@ -125,33 +167,52 @@ public class Main {
             size = size + 1;
         }
 
-        public int getTotal() {
+        private int getBlackjack() {
+            int handScore = 0;
+            for (Card card : this.hand) {
+                if (card.getValue() > 10) {
+                    handScore = handScore + 10;
+                }else if (card.score == 1 && this.getTotal() + 10 <=21 ) {
+                    handScore = handScore + 11;
+                } else {
+                    handScore = card.getValue();
+                }
+            }
+            System.out.println(handScore);
+            return handScore;
+        }
+
+        private int getTotal() {
             int value = 0;
-            for (int i = 0; i < hand.size(); i++) {
-                Card valueCard = hand.get(i);
-                value = value + valueCard.getValue();
+            for (int i = 0; i < this.hand.size(); i++) {
+                value = value + this.hand.get(i).getValue();
             }
             return value;
         }
 
-        public int getSize() {
+        private int getSize() {
             return this.size;
         }
 
-        public Card getCard(int place) {
+        private Card getCard(int place) {
             return this.hand.get(place);
         }
     }
 
     static class Card {
         int rank;
+        int score;
         String suit;
 
         Card(int num) {
             rank = num % 13;
-
+            score = rank;
             if (rank == 0) {
                 rank = 11;
+                score = 1;
+            }
+            if (score > 10) {
+                score = 10;
             }
             switch (num % 4) {
                 case 0:
@@ -187,7 +248,7 @@ public class Main {
         }
 
         private int getValue() {
-            return this.rank;
+            return this.score;
         }
     }
 }
