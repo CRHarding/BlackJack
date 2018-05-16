@@ -1,4 +1,6 @@
 package com.company;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -18,22 +20,43 @@ public class Main {
 //        int numberOfDecks = reader.nextInt();
         int numberOfDecks = 2;
         Deck d = new Deck(numberOfDecks);
-
+        System.out.println(d.deal());
 //        while (money > 0) {
 //
 //        }
     }
 
     static class Deck {
-        Card[] cards;
+        ArrayList<Card> cards = new ArrayList<Card>();
+        int numDealt;
 
         Deck(int num) {
-            cards = new Card[53];
-            for (int i = 1; i <= 52; i++) cards[i] = new Card(i);
-            for (int i = 1; i <= cards.length - 1; i++) {
-                System.out.println(cards[i].toString());
+            for (int i = 1; i <= 52; i++) cards.add(new Card(i));
+            shuffle();
+            numDealt = 0;
+        }
+
+        public void shuffle() {
+            int n = this.cards.size();
+            Random random = new Random();
+            for (int i = 0; i < this.cards.size(); i++) {
+                int randomValue = i + random.nextInt(n - i);
+                Card randomCard = this.cards.get(randomValue);
+                this.cards.set(randomValue, this.cards.get(i));
+                this.cards.set(i, randomCard);
             }
         }
+
+        public Card deal() {
+            Card dealCard = this.cards.remove(numDealt);
+            numDealt = numDealt + 1;
+            return dealCard;
+        }
+    }
+    
+    static class Hand {
+        ArrayList<Card> hand = new ArrayList<Card>();
+
     }
 
     static class Card {
