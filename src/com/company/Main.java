@@ -25,8 +25,6 @@ public class Main {
         player.setupBlackjack();
         computer.setupBlackjack();
 
-        System.out.println(player.getSize());
-        System.out.println(computer.getSize());
         System.out.println(player);
         System.out.println(computer);
 
@@ -35,9 +33,6 @@ public class Main {
         } else {
             System.out.println("Sorry, chump. You lost.");
         }
-        //        while (money > 0) {
-//
-//        }
     }
 
     static class User {
@@ -92,11 +87,13 @@ public class Main {
     }
 
     static class Deck {
-        ArrayList<Card> cards = new ArrayList<Card>();
+        ArrayList<Card> cards = new ArrayList<>();
         int numDealt;
 
         Deck(int num) {
-            for (int i = 1; i <= 52; i++) cards.add(new Card(i));
+            for (int i = 1; i <= 52; i++) {
+                cards.add(new Card(i));
+            }
             shuffle();
             numDealt = 0;
         }
@@ -152,6 +149,10 @@ public class Main {
 
         Card(int num) {
             rank = num % 13;
+
+            if (rank == 0) {
+                rank = 11;
+            }
             switch (num % 4) {
                 case 0:
                     suit = "Clubs";
@@ -171,12 +172,22 @@ public class Main {
         }
 
         public String toString() {
-            if (this.rank != 1) return this.rank + " of " + this.suit;
-            return "Ace of " + this.suit;
+            if (this.rank != 1 && this.rank < 11) return this.rank + " of " + this.suit;
+            if (this.rank == 1) return "Ace of " + this.suit;
+            switch (this.rank) {
+                case 11:
+                    return "Jack of " + this.suit;
+                case 12:
+                    return "Queen of " + this.suit;
+                case 13:
+                    return "King of " + this.suit;
+                default:
+                    return "Incorrect input for this.rank in card toString method";
+            }
         }
 
         private int getValue() {
-            return this.rank * 13;
+            return this.rank;
         }
     }
 }
