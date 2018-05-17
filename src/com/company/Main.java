@@ -58,6 +58,7 @@ public class Main {
 
                 System.out.println("Would you like to play again? Yes or No");
                 String wantToPlay = reader.nextLine().toLowerCase();
+                reader.next();
                 playAgain = wantToPlay.equals("y") || wantToPlay.equals("yes");
                 if (playAgain) {
                     resetGame();
@@ -72,17 +73,12 @@ public class Main {
             System.out.println(player.toString());
             System.out.println("You have $" + player.getMoney() + "...");
             System.out.println("How much would you like to bet?");
-            int playerBet = reader.nextInt ();
-            while (playerBet < 0 || playerBet > player.getMoney()) {
-                if (playerBet < 0) {
-                    System.out.println("You've gotta playerBet more than 0 ya dingus!");
-                    playerBet = reader.nextInt();
-                }
-                if (playerBet > player.getMoney()) {
-                    System.out.println("We both know that you don't have that kinda dough...");
-                    playerBet = reader.nextInt();
-                }
-            }
+            do {
+                int playerBet = reader.nextInt();
+                if (playerBet < 0) System.out.println ("You've gotta bet more than 0 ya dingus!");
+                if (playerBet > player.getMoney())
+                    System.out.println ("We both know that you don't have that kinda dough...");
+            } while (playerBet < 0 || playerBet > player.getMoney());
         }
 
         private void hit() {
@@ -90,7 +86,7 @@ public class Main {
             boolean playerWin = false;
             while (hit) {
                 System.out.println("Would you like to hit or stay?");
-                String choice = reader.nextLine().toLowerCase();
+                String choice = reader.next().toLowerCase();
                 if (choice.equals("h") || choice.equals("hit")) {
                     player.addCard(d);
                     int playerTotal = player.getBlackjack();
@@ -98,8 +94,9 @@ public class Main {
                     if (playerTotal > 21 && playerTotal != 50) {
                         System.out.println("You busted, sorry chump.");
                         hit = false;
+                    } else {
+                        System.out.println ("Current Cards: " + player.toString ());
                     }
-                    System.out.println("Current Cards: " + player.toString());
                 } else if (choice.equals("s") || choice.equals("stay")) {
                     hit = false;
                     playerWin = findWin();
@@ -117,7 +114,7 @@ public class Main {
             System.out.println(computer.toString());
             System.out.println ("Player total--->" + player.getTotal());
             System.out.println ("Computer total--->" + computer.getTotal());
-            if (player.getTotal == 50) {
+            if (player.getTotal() == 50) {
                 System.out.println ("YOU GOT BLACKJACK!!!");
                 player.setMoney(player.getMoney() + playerBet * 4);
                 return true;
