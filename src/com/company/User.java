@@ -11,12 +11,17 @@ public class User {
         hand = new Hand ();
     }
 
+    String getName() {
+        return this.name;
+    }
+
     int getMoney() {
         return this.money;
     }
 
     void setMoney(int amount) {
-        this.money = this.money - amount;
+        System.out.println (amount);
+        this.money = this.money + amount;
     }
 
     void addCard(Deck d) { hand.addCard(d.deal()); }
@@ -27,9 +32,7 @@ public class User {
     }
 
     void resetHand() {
-        for (int i = 0; i < hand.getSize(); i++) {
-            hand.removeCard();
-        }
+        this.hand = new Hand();
     }
 
     public String toString() {
@@ -50,9 +53,5 @@ public class User {
 
     int getTotal() {
         return this.hand.getTotal();
-    }
-
-    int getBlackjack() {
-        return this.hand.getBlackjack();
     }
 }

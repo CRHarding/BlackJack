@@ -12,9 +12,6 @@ public class Card {
             rank = 1;
             score = 1;
         }
-        if (score > 10) {
-            score = 10;
-        }
 
         switch (num % 4) {
             case 0:

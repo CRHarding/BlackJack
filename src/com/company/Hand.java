@@ -11,31 +11,25 @@ class Hand {
         size = size + 1;
     }
 
-    void removeCard() {
-        hand.remove(hand.size() - 1);
-    }
-
-    int getBlackjack() {
+    int getTotal() {
         int handScore = 0;
-        for (Card card : this.hand) {
-            if (card.getValue() == 1 && this.getTotal() + 10 == 21) {
-                handScore = 50;
-            }else if (card.getValue() == 1 && this.getTotal() + 10 <= 21 ) {
-                handScore = handScore + 11;
-            } else {
-                handScore = handScore + card.getValue();
+        if (this.size == 2 && (this.hand.get(0).getValue() == 1 && this.hand.get(1).getValue() > 10) || (this.hand.get(0).getValue() > 10) && this.hand.get(1).getValue() == 1) {
+            handScore = 50;
+        } else {
+            for (int i = 0; i < this.size; i++) {
+                Card card = this.hand.get(i);
+                if (card.getValue () == 1 && handScore + 11 < 21) {
+                    handScore = handScore + 11;
+                } else {
+                    if (card.getValue() > 10)
+                        handScore = handScore + 10;
+                    else {
+                        handScore = handScore + card.getValue ();
+                    }
+                }
             }
         }
-        System.out.println(handScore);
         return handScore;
-    }
-
-    int getTotal() {
-        int value = 0;
-        for (int i = 0; i < this.hand.size(); i++) {
-            value = value + this.hand.get(i).getValue();
-        }
-        return value;
     }
 
     int getSize() {
