@@ -20,7 +20,6 @@ public class User {
     }
 
     void setMoney(int amount) {
-        System.out.println (amount);
         this.money = this.money + amount;
     }
 

@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 class Game {
@@ -10,33 +11,44 @@ class Game {
     private Scanner reader;
     private int playerBet;
     private int numDecks;
+    private int money;
+    private HashMap<String, Integer> saveFile;
 
-    Game() {
+    Game(HashMap<String, Integer> saveFile) {
         this.player = new User ("Casey", 500);
         this.computer = new User ("Computer", 100);
         playAgain = true;
-        numDecks = 2;
-        d = new Deck (numDecks);
         playerBet = 0;
+        this.saveFile = saveFile;
+        money = 0;
     }
 
     void run() {
         reader = new Scanner(System.in);
-//        System.out.println("What is your name?");
-//        String name = reader.nextLine();
-//        System.out.println("Welcome " + name + ", how much money do you have?");
-//        int money = 0;
-//        while (money <= 0) {
-//            money = reader.nextInt();
-//            if (money <= 0) System.out.println("You've gotta have some dough, buddy...");
-//        }
-//        System.out.println("How many decks will you be playing with?");
-//        int numberOfDecks = reader.nextInt();
+        System.out.println("What is your name?");
+        String name = reader.nextLine();
+
+        if (saveFile.containsKey(name)) {
+            money = saveFile.get(name);
+            System.out.println ("Welcome back, " + name + "! You currently have: $" + money);
+        } else System.out.println ("Welcome " + name + ", how much money do you have?");
+
+        while (money <= 0) {
+            money = reader.nextInt();
+            if (money <= 0) System.out.println("You've gotta have some dough, buddy...");
+        }
+
+        System.out.println("How many decks will you be playing with?");
+        int numberOfDecks = reader.nextInt();
+        d = new Deck(numberOfDecks);
+
         while (player.getMoney() > 0 && playAgain) {
             player.setupBlackjack(d);
             computer.setupBlackjack(d);
 
-            bet();
+            Bet b = new Bet(reader, player);
+
+            b.bet();
             printPlayer();
             hit();
 
@@ -54,16 +66,19 @@ class Game {
         reader.close();
     }
 
-    private void bet() {
-        System.out.println(player.toString());
-        System.out.println("You have $" + player.getMoney() + "...");
-        System.out.println("How much would you like to bet, " + player.getName() + "?");
-        do {
-            playerBet = reader.nextInt();
-            if (playerBet < 0) System.out.println ("You've gotta bet more than 0 ya dingus!");
-            if (playerBet > player.getMoney())
-                System.out.println ("We both know that you don't have that kinda dough...");
-        } while (playerBet < 0 || playerBet > player.getMoney());
+    private void computerHit() {
+        while (computer.getTotal() < 16) {
+            System.out.println("This is dealer total points --> " + computer.getTotal());
+            computer.addCard(d);
+            int computerTotal = computer.getTotal();
+            System.out.println("This is dealer total points --> " + computerTotal);
+            if (computerTotal > 21 && computerTotal != 50) {
+                System.out.println("Dealer busted!.");
+            } else {
+                System.out.println("This is dealer total points --> " + computer.getTotal());
+                System.out.println ("Current Cards: " + computer.toString ());
+            }
+        }
     }
 
     private void hit() {
@@ -91,6 +106,7 @@ class Game {
                 playerWin = findWin();
             }
         }
+        computerHit();
         if (playerWin) {
             System.out.println("You won!! You have $" + player.getMoney() + " left.");
         } else {
