@@ -12,7 +12,7 @@ class Bet {
         this.player = player;
     }
 
-    void bet() {
+    int bet() {
         System.out.println(player.toString());
         System.out.println("You have $" + player.getMoney() + "...");
         System.out.println("How much would you like to bet, " + player.getName() + "?");
@@ -22,5 +22,6 @@ class Bet {
             if (playerBet > player.getMoney())
                 System.out.println ("We both know that you don't have that kinda dough...");
         } while (playerBet < 0 || playerBet > player.getMoney());
+        return playerBet;
     }
 }

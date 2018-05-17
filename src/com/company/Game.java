@@ -9,24 +9,25 @@ class Game {
     private Deck d;
     private boolean playAgain;
     private Scanner reader;
-    private int playerBet;
-    private int numDecks;
     private int money;
     private HashMap<String, Integer> saveFile;
+    private int numberOfDecks;
 
-    Game(HashMap<String, Integer> saveFile) {
+    Game() {
         this.player = new User ("Casey", 500);
         this.computer = new User ("Computer", 100);
         playAgain = true;
-        playerBet = 0;
-        this.saveFile = saveFile;
         money = 0;
+        numberOfDecks = 0;
     }
 
     void run() {
         reader = new Scanner(System.in);
         System.out.println("What is your name?");
         String name = reader.nextLine();
+
+        FileManagement file = new FileManagement();
+        saveFile = file.readFile();
 
         if (saveFile.containsKey(name)) {
             money = saveFile.get(name);
@@ -39,7 +40,7 @@ class Game {
         }
 
         System.out.println("How many decks will you be playing with?");
-        int numberOfDecks = reader.nextInt();
+        numberOfDecks = reader.nextInt();
         d = new Deck(numberOfDecks);
 
         while (player.getMoney() > 0 && playAgain) {
@@ -47,10 +48,16 @@ class Game {
             computer.setupBlackjack(d);
 
             Bet b = new Bet(reader, player);
-
-            b.bet();
+            int playerBet = b.bet();
+            Hit hit = new Hit(computer, player, d, reader, playerBet);
+            boolean playerWin = hit.playerHit();
             printPlayer();
-            hit();
+
+            if (playerWin) {
+                System.out.println("You won!! You have $" + player.getMoney() + " left.");
+            } else {
+                System.out.println("You lost. You have $" + player.getMoney() + " left");
+            }
 
             if (player.getMoney() == 0) {
                 System.out.println ("Gosh, " + player.getName() + ", I guess you're gonna have to come back when you have more dough...");
@@ -66,72 +73,6 @@ class Game {
         reader.close();
     }
 
-    private void computerHit() {
-        while (computer.getTotal() < 16) {
-            System.out.println("This is dealer total points --> " + computer.getTotal());
-            computer.addCard(d);
-            int computerTotal = computer.getTotal();
-            System.out.println("This is dealer total points --> " + computerTotal);
-            if (computerTotal > 21 && computerTotal != 50) {
-                System.out.println("Dealer busted!.");
-            } else {
-                System.out.println("This is dealer total points --> " + computer.getTotal());
-                System.out.println ("Current Cards: " + computer.toString ());
-            }
-        }
-    }
-
-    private void hit() {
-        boolean hit = true;
-        boolean playerWin = false;
-        while (hit) {
-            System.out.println("This is your total points --> " + player.getTotal());
-            System.out.println("Would you like to hit or stay?");
-            String choice = reader.next().toLowerCase();
-            if (choice.equals("h") || choice.equals("hit")) {
-                player.addCard(d);
-                int playerTotal = player.getTotal();
-                System.out.println("This is your total points --> " + playerTotal);
-                if (playerTotal > 21 && playerTotal != 50) {
-                    System.out.println("You busted, sorry chump.");
-                    player.setMoney(playerBet * -1);
-                    hit = false;
-                    playerWin = false;
-                } else {
-                    System.out.println("This is your total points --> " + player.getTotal());
-                    System.out.println ("Current Cards: " + player.toString ());
-                }
-            } else if (choice.equals("s") || choice.equals("stay")) {
-                hit = false;
-                playerWin = findWin();
-            }
-        }
-        computerHit();
-        if (playerWin) {
-            System.out.println("You won!! You have $" + player.getMoney() + " left.");
-        } else {
-            System.out.println("You lost. You have $" + player.getMoney() + " left");
-        }
-    }
-
-    private boolean findWin() {
-        System.out.println("Computer hand:");
-        System.out.println(computer.toString());
-        System.out.println ("Player total--->" + player.getTotal());
-        System.out.println ("Computer total--->" + computer.getTotal());
-        if (player.getTotal() == 50) {
-            System.out.println ("YOU GOT BLACKJACK" + player.getName().toUpperCase() + "!!!");
-            player.setMoney(playerBet * 4);
-            return true;
-        }else if (player.getTotal() > computer.getTotal()) {
-            player.setMoney(playerBet * 2);
-            return true;
-        } else {
-            player.setMoney(playerBet * -1);
-            return false;
-        }
-    }
-
     private void printPlayer() {
         System.out.println("Your hand:");
         System.out.println(player.toString());
@@ -140,9 +81,8 @@ class Game {
     private void resetGame() {
         player.resetHand();
         computer.resetHand();
-        playerBet = 0;
         if (d.getSize() < 15) {
-            d = new Deck (numDecks);
+            d = new Deck (numberOfDecks);
         }
     }
 }
