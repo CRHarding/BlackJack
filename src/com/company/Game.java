@@ -1,7 +1,7 @@
 package com.company;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Scanner;
 
 class Game {
@@ -11,7 +11,7 @@ class Game {
     private boolean playAgain;
     private Scanner reader;
     private int money;
-    private Map<String, Integer> saveFile;
+    private Properties saveFile;
     private int numberOfDecks;
 
     Game() {
@@ -22,16 +22,16 @@ class Game {
         numberOfDecks = 0;
     }
 
-    void run() {
+    void run() throws IOException {
         reader = new Scanner(System.in);
         System.out.println("What is your name?");
         String name = reader.nextLine();
 
         FileManagement file = new FileManagement();
         saveFile = file.readFile();
-
+        System.out.println (saveFile);
         if (saveFile.containsKey(name)) {
-            money = saveFile.get(name);
+            money = Integer.parseInt(saveFile.get(name).toString());
             System.out.println ("Welcome back, " + name + "! You currently have: $" + money);
         } else System.out.println ("Welcome " + name + ", how much money do you have?");
 
@@ -75,8 +75,9 @@ class Game {
             saveFile.remove (player.getName());
         }
 
-        saveFile.put(player.getName(), player.getMoney());
-        file.writeFile(saveFile);
+        saveFile.setProperty(player.getName(), Integer.toString(player.getMoney()));
+
+        file.writeFile();
         reader.close();
     }
 
