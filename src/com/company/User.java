@@ -15,6 +15,8 @@ public class User {
         return this.name;
     }
 
+    void setName(String name) { this.name = name; }
+
     int getMoney() {
         return this.money;
     }
