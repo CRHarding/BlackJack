@@ -3,6 +3,7 @@ package com.company;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
+import processing.core.PApplet;
 
 class Game {
     private User player;
@@ -18,6 +19,7 @@ class Game {
         playAgain = true;
         money = 0;
         numberOfDecks = 0;
+
     }
 
     void run() throws IOException {
