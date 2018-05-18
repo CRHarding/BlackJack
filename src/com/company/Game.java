@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 class Game {
@@ -10,7 +11,7 @@ class Game {
     private boolean playAgain;
     private Scanner reader;
     private int money;
-    private HashMap<String, Integer> saveFile;
+    private Map<String, Integer> saveFile;
     private int numberOfDecks;
 
     Game() {
@@ -70,6 +71,12 @@ class Game {
                 }
             }
         }
+        if (saveFile.containsKey (player.getName())) {
+            saveFile.remove (player.getName());
+        }
+
+        saveFile.put(player.getName(), player.getMoney());
+        file.writeFile(saveFile);
         reader.close();
     }
 
